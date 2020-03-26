@@ -86,7 +86,7 @@ class Translation implements TranslationInterface
         if (!Session::has('locale')) {
             $locale = substr($this->request->server('HTTP_ACCEPT_LANGUAGE'), 0, 2);
 
-            if (!in_array($locale, config('translation.available_locales'))) {
+            if (!in_array($locale, $this->getConfigLocales())) {
                 $locale = config('app.locale');
             }
 
