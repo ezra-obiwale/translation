@@ -40,7 +40,7 @@
                 "Stevebauman\\Translation\\TranslationServiceProvider"
             ],
             "aliases": {
-                "Translation": "Stevebauman\Translation\Facades\Translation"
+                "Translation": "Stevebauman\\Translation\\Facades\\Translation"
             }
         }
     },
