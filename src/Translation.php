@@ -6,6 +6,7 @@ use ErrorException;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Session;
 use InvalidArgumentException;
 use Stevebauman\Translation\Contracts\Client as ClientInterface;
@@ -87,7 +88,7 @@ class Translation implements TranslationInterface
             $locale = substr($this->request->server('HTTP_ACCEPT_LANGUAGE'), 0, 2);
 
             if (!in_array($locale, $this->getConfigLocales())) {
-                $locale = config('app.locale');
+                $locale = Config::get('app.locale');
             }
 
             Session::put('locale', $locale);
@@ -155,7 +156,7 @@ class Translation implements TranslationInterface
             if (count($replacements) > 0) {
                 $translation->translation = $this->makeTranslationSafePlaceholders($translation->translation, $replacements);
             }
-            
+
             return $this->makeReplacements($translation->translation, $replacements);
         } catch (\Illuminate\Database\QueryException $e) {
             // If foreign key integrity constrains fail, we have a caching issue
